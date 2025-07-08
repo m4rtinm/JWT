@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorio de Hacking: JWT</title>
+    <!-- Librería JOSE para manejar operaciones JWT en el cliente -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jose/4.14.4/index.umd.min.js"></script>
+    <style>
+        /* Estilos CSS inspirados en la imagen */
+        :root {
+            --bg-dark: #1a1b26;
+            --bg-panel: #24283b;
+            --bg-input: #2a2f41;
+            --text-main: #c0caf5;
+            --text-dim: #a9b1d6;
+            --accent-blue: #7aa2f7;
+            --accent-green: #9ece6a;
+            --accent-red: #f7768e;
+            --accent-orange: #ff9e64;
+            --border-color: #414868;
+        }
+
+        body {
+            font-family: 'Consolas', 'Menlo', monospace;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            margin: 0;
+            padding: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .lab-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .lab-header h1 {
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-bar-container {
+            width: 80%;
+            max-width: 600px;
+            background-color: var(--bg-panel);
+            border-radius: 5px;
+            margin: 1rem auto;
+            border: 1px solid var(--border-color);
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 15px;
+            background-color: var(--accent-green);
+            border-radius: 5px;
+            transition: width 0.5s ease-in-out;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+
+        .challenges-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .challenge {
+            background-color: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .challenge.locked {
+            filter: grayscale(80%) opacity(0.6);
+            pointer-events: none;
+        }
+
+        .challenge.completed {
+            border-left-color: var(--accent-green);
+        }
+        
+        .challenge.active {
+             border-left-color: var(--accent-blue);
+             box-shadow: 0 0 20px rgba(122, 162, 247, 0.2);
+        }
+
+        .challenge-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .challenge-header h2 {
+            margin: 0;
+            color: var(--text-main);
+            font-size: 1.25rem;
+        }
+        
+        .difficulty-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            padding: 0.5rem 0.875rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 2px solid transparent;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            transition: all 0.2s ease;
+        }
+
+        .difficulty-badge:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        .difficulty-badge .stars {
+            font-size: 0.875rem;
+            filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
+        }
+
+        .tag-principiante { 
+            background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+            color: #ffffff;
+            border-color: #16a34a;
+        }
+        
+        .tag-intermedio { 
+            background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
+            color: #ffffff;
+            border-color: #ea580c;
+        }
+        
+        .tag-avanzado { 
+            background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
+            color: #ffffff;
+            border-color: #dc2626;
+        }
+
+        .mission {
+            background-color: rgba(0,0,0,0.2);
+            padding: 0.75rem 1rem;
+            border-left: 3px solid var(--accent-orange);
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+        
+        .mission code {
+            background-color: #16161e;
+            padding: 2px 5px;
+            border-radius: 3px;
+            color: var(--accent-orange);
+        }
+
+        .challenge-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        button {
+            background-color: var(--accent-blue);
+            color: var(--bg-dark);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-family: inherit;
+            font-size: 1em;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: var(--text-dim);
+        }
+
+        textarea, input[type="text"] {
+            background-color: var(--bg-input);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            padding: 10px;
+            font-family: inherit;
+            resize: vertical;
+        }
+
+        .server-column {
+            position: sticky;
+            top: 1.5rem;
+        }
+
+        .server-view {
+            background-color: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        
+        .server-view h3 {
+            margin-top: 0;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .server-log-section {
+            margin-bottom: 1rem;
+        }
+
+        .server-log-section h4 {
+            margin: 0 0 0.5rem 0;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        pre {
+            background-color: var(--bg-dark);
+            padding: 1rem;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin: 0;
+            min-height: 50px;
+            font-size: 0.85rem;
+        }
+
+        .debug-menu {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            text-align: center;
+            background-color: var(--bg-panel);
+            border-radius: 8px;
+        }
+        .debug-menu h3 { margin-top: 0; }
+        .debug-menu .buttons { display: flex; justify-content: center; gap: 1rem; }
+
+        .success { color: var(--accent-green); }
+        .error { color: var(--accent-red); }
+        .info { color: var(--accent-orange); }
+
+        @media (max-width: 1024px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            .server-column {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="lab-header">
+        <h1>Laboratorio de Hacking: JWT</h1>
+        <p>Completa los desafíos para convertirte en un experto en seguridad JWT.</p>
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <p id="progressText">0% completado - ¡Comienza tu aventura!</p>
+    </div>
+
+    <main class="main-grid">
+        <div class="challenges-column">
+            <!-- Nivel 1: Firma no Verificada -->
+            <section class="challenge active" id="level1">
+                <div class="challenge-header">
+                    <h2>Nivel 1: El API Confiado</h2>
+                    <span class="difficulty-badge tag-principiante">
+                        <span class="stars">⭐</span>
+                        Principiante
+                    </span>
+                </div>
+                <p class="mission"><b>Misión:</b> La API no verifica la firma. Modifica el payload del token para acceder como <code>admin</code>.</p>
+                <div class="challenge-content">
+                    <button data-action="l1-getToken">1. Generar mi Token de "user"</button>
+                    <textarea id="l1-tokenArea" rows="4" readonly placeholder="Aquí aparecerá tu token..."></textarea>
+                    <label for="l1-modifiedToken">2. Pega aquí tu token modificado:</label>
+                    <textarea id="l1-modifiedToken" rows="4" placeholder="Usa jwt.io para cambiar el payload a {'role':'admin'}"></textarea>
+                    <button data-action="l1-verify">🔬 Verificar Acceso</button>
+                </div>
+            </section>
+
+            <!-- Nivel 2: Algoritmo "none" -->
+            <section class="challenge locked" id="level2">
+                <div class="challenge-header">
+                    <h2>Nivel 2: El Algoritmo "ninguno"</h2>
+                    <span class="difficulty-badge tag-principiante">
+                        <span class="stars">⭐</span>
+                        Principiante
+                    </span>
+                </div>
+                <p class="mission"><b>Misión:</b> La API acepta tokens con <code>alg:none</code>. Forja un token sin firma para reclamar la recompensa de <code>admin</code>.</p>
+                <div class="challenge-content">
+                     <label for="l2-noneToken">Pega tu token forjado con <code>alg:none</code>:</label>
+                    <textarea id="l2-noneToken" rows="4" placeholder="Ej: eyJhbGciOiJub25lIn0.eyJyb2xlIjoiYWRtaW4ifQ."></textarea>
+                    <button data-action="l2-verify">🎁 Reclamar Recompensa</button>
+                </div>
+            </section>
+
+            <!-- Nivel 3: Secreto Débil -->
+            <section class="challenge locked" id="level3">
+                 <div class="challenge-header">
+                    <h2>Nivel 3: El Secreto Débil</h2>
+                    <span class="difficulty-badge tag-intermedio">
+                        <span class="stars">⭐⭐</span>
+                        Intermedio
+                    </span>
+                </div>
+                <p class="mission"><b>Misión:</b> El token está firmado con una clave débil. Encuéntrala, forja un token de <code>admin</code> y fírmalo.</p>
+                <div class="challenge-content">
+                    <p>1. Token a crackear:</p>
+                    <pre><code id="l3-tokenToCrack"></code></pre>
+                    <button data-action="l3-bruteforce">2. Iniciar Ataque de Fuerza Bruta</button>
+                    <label for="l3-forgedToken">3. Pega tu token de admin firmado con la clave encontrada:</label>
+                    <textarea id="l3-forgedToken" rows="4" placeholder="Usa la clave encontrada para firmar un nuevo token con payload {'user':'admin'}"></textarea>
+                    <button data-action="l3-verify">🔑 Acceder al Panel</button>
+                </div>
+            </section>
+
+            <!-- Nivel 4: Inyección JWK -->
+            <section class="challenge locked" id="level4">
+                <div class="challenge-header">
+                    <h2>Nivel 4: La Verificación Flexible</h2>
+                    <span class="difficulty-badge tag-avanzado">
+                        <span class="stars">⭐⭐⭐</span>
+                        Avanzado
+                    </span>
+                </div>
+                <p class="mission"><b>Misión:</b> La API valida el token usando la clave pública del header (<code>jwk</code>). Genera tus propias claves, inyecta la pública y firma un token de <code>admin</code>.</p>
+                <div class="challenge-content">
+                    <button data-action="l4-genKeys">1. Generar mi Par de Claves (RSA)</button>
+                    <div id="l4-keysDisplay" style="display:none;">
+                        <p><strong>Clave Pública (Formato JWK para el header):</strong></p>
+                        <pre><code id="l4-publicKey"></code></pre>
+                    </div>
+                    <label for="l4-maliciousToken">2. Pega tu JWT malicioso (firmado con tu clave privada):</label>
+                    <textarea id="l4-maliciousToken" rows="5" placeholder="Crea un token con tu clave pública en el header (jwk) y payload de admin. Fírmalo con tu clave privada."></textarea>
+                    <button data-action="l4-verify">🚀 Ejecutar Ataque JWK</button>
+                </div>
+            </section>
+        </div>
+
+        <div class="server-column">
+            <div class="server-view">
+                <h3>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M7.5 1a.5.5 0 0 1 .5.5V3a.5.5 0 0 1-1 0V1.5a.5.5 0 0 1 .5-.5zM4.346 2.929a.5.5 0 0 1 .707 0l1.06 1.06a.5.5 0 0 1-.707.708L4.347 3.636a.5.5 0 0 1 0-.707zM2 7.5a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H2.5a.5.5 0 0 1-.5-.5zm1.06-4.293a.5.5 0 0 1 0 .707L2.929 4.346a.5.5 0 1 1-.707-.707l1.06-1.06a.5.5 0 0 1 .707 0zM13 7.5a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H13.5a.5.5 0 0 1-.5-.5zm-2.06 4.293a.5.5 0 0 1 0 .707l-1.06 1.06a.5.5 0 0 1-.707-.707l1.06-1.06a.5.5 0 0 1 .707 0zM11.654 2.929a.5.5 0 0 1 .707 0l1.06 1.06a.5.5 0 0 1-.707.708L11.654 3.636a.5.5 0 0 1 0-.707zM8.5 13a.5.5 0 0 1 .5.5v1.5a.5.5 0 0 1-1 0V13.5a.5.5 0 0 1 .5-.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm0-1A7 7 0 1 1 8 1a7 7 0 0 1 0 14z"/></svg>
+                    Vista del "Servidor"
+                </h3>
+                <div class="server-log-section">
+                    <h4>Análisis del Token Recibido</h4>
+                    <pre id="server-log-analysis">// Esperando una interacción...</pre>
+                </div>
+                <div class="server-log-section">
+                    <h4>Resultado de la Verificación</h4>
+                    <pre id="server-log-verification">// ...</pre>
+                </div>
+                <div class="server-log-section">
+                    <h4>Respuesta de la API</h4>
+                    <pre id="server-log-response">// ...</pre>
+                </div>
+                 <div class="server-log-section" id="cracker-console-container" style="display: none;">
+                    <h4>Consola del Cracker</h4>
+                    <pre id="cracker-console"></pre>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="debug-menu">
+        <h3>⚙️ Opciones de Depuración</h3>
+        <div class="buttons">
+            <button data-action="debug-unlock">Desbloquear Todos los Retos</button>
+            <button data-action="debug-solve">Mostrar Soluciones</button>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const state = {
+                completedLevels: new Set(),
+                level3: { secret: new TextEncoder().encode('secret123'), tokenToCrack: '' },
+                level4: { keys: null }
+            };
+
+            // --- INICIALIZACIÓN ---
+            initLevel3();
+            document.querySelectorAll('.challenge').forEach(el => el.addEventListener('click', () => setActiveChallenge(el.id)));
+
+            // --- MANEJADOR DE EVENTOS PRINCIPAL ---
+            document.body.addEventListener('click', (e) => {
+                const button = e.target.closest('button');
+                if (!button) return;
+                const action = button.dataset.action;
+                if (!action) return;
+
+                const actions = {
+                    'l1-getToken': generateAndShowLevel1Token, 'l1-verify': verifyLevel1,
+                    'l2-verify': verifyLevel2,
+                    'l3-bruteforce': startLevel3BruteForce, 'l3-verify': verifyLevel3,
+                    'l4-genKeys': generateAndShowLevel4Keys, 'l4-verify': verifyLevel4,
+                    'debug-unlock': unlockAllChallenges, 'debug-solve': solveAllChallenges,
+                };
+                
+                if (actions[action]) actions[action]();
+            });
+
+            // --- LÓGICA DE UI ---
+            function updateProgress() {
+                const completedCount = state.completedLevels.size;
+                const totalLevels = 4;
+                const percentage = (completedCount / totalLevels) * 100;
+                document.getElementById('progressBar').style.width = `${percentage}%`;
+                const messages = ["¡Comienza tu aventura!", "¡Buen comienzo!", "¡Sigue así!", "¡Vas por la mitad!", "¡Felicidades, eres un experto!"];
+                document.getElementById('progressText').textContent = `${Math.round(percentage)}% completado - ${messages[completedCount]}`;
+            }
+
+            function setActiveChallenge(levelId) {
+                if(document.getElementById(levelId).classList.contains('locked')) return;
+                document.querySelectorAll('.challenge').forEach(el => el.classList.remove('active'));
+                document.getElementById(levelId).classList.add('active');
+            }
+
+            function markLevelAsCompleted(levelId) {
+                const levelElement = document.getElementById(levelId);
+                if (!state.completedLevels.has(levelId)) {
+                    state.completedLevels.add(levelId);
+                    levelElement.classList.add('completed');
+                    updateProgress();
+                    
+                    const currentLevelNum = parseInt(levelId.replace('level', ''));
+                    const nextLevelId = `level${currentLevelNum + 1}`;
+                    const nextLevelElement = document.getElementById(nextLevelId);
+                    if (nextLevelElement) {
+                        nextLevelElement.classList.remove('locked');
+                        setActiveChallenge(nextLevelId);
+                    }
+                }
+            }
+            
+            function updateServerView({ analysis = '//...', verification = '//...', response = '//...' }) {
+                document.getElementById('server-log-analysis').textContent = analysis;
+                document.getElementById('server-log-verification').textContent = verification;
+                document.getElementById('server-log-response').textContent = response;
+                document.getElementById('cracker-console-container').style.display = 'none';
+            }
+
+            // --- LÓGICA DE DESAFÍOS ---
+            async function generateAndShowLevel1Token() {
+                const secret = new TextEncoder().encode('un-secreto-fuerte');
+                const token = await new jose.SignJWT({ role: 'user', userId: 'user123' }).setProtectedHeader({ alg: 'HS256' }).setIssuedAt().setExpirationTime('2h').sign(secret);
+                document.getElementById('l1-tokenArea').value = token;
+                updateServerView({ analysis: 'Token de usuario generado y entregado al cliente.' });
+            }
+            
+            function verifyLevel1() {
+                const token = document.getElementById('l1-modifiedToken').value.trim();
+                if (!token) return updateServerView({ analysis: 'ERROR: No se recibió ningún token.' });
+                try {
+                    const payload = jose.decodeJwt(token);
+                    const header = jose.decodeProtectedHeader(token);
+                    const analysis = `Token recibido.\nHeader: ${JSON.stringify(header)}\nPayload: ${JSON.stringify(payload)}`;
+                    const verification = `ⓘ ADVERTENCIA: La firma del token fue IGNORADA.`;
+                    if (payload.role === 'admin') {
+                        updateServerView({ analysis, verification, response: `✅ ÉXITO: Payload indica role='admin'. Acceso concedido.` });
+                        markLevelAsCompleted('level1');
+                    } else {
+                        updateServerView({ analysis, verification, response: `❌ DENEGADO: El rol '${payload.role || 'nulo'}' no es 'admin'.` });
+                    }
+                } catch (err) {
+                    updateServerView({ analysis: `❌ ERROR: Token inválido o malformado.\n${err.message}` });
+                }
+            }
+
+            function verifyLevel2() {
+                const token = document.getElementById('l2-noneToken').value.trim();
+                if (!token) return updateServerView({ analysis: 'ERROR: No se recibió ningún token.' });
+                const parts = token.split('.');
+                if (parts.length < 2 || (parts.length === 3 && parts[2] !== '')) {
+                   return updateServerView({ verification: '❌ DENEGADO: Un token "none" no debe tener firma.' });
+                }
+                try {
+                    const header = JSON.parse(atob(parts[0]));
+                    const payload = JSON.parse(atob(parts[1]));
+                    const analysis = `Token recibido.\nHeader: ${JSON.stringify(header)}\nPayload: ${JSON.stringify(payload)}`;
+                    if (header.alg && header.alg.toLowerCase() === 'none') {
+                        const verification = `ⓘ ADVERTENCIA: Algoritmo 'none' detectado. No se requiere firma.`;
+                        if (payload.role === 'admin') {
+                            updateServerView({ analysis, verification, response: `✅ ÉXITO: Payload es 'admin'. Recompensa reclamada.` });
+                            markLevelAsCompleted('level2');
+                        } else {
+                            updateServerView({ analysis, verification, response: `❌ DENEGADO: Rol '${payload.role}' no es 'admin'.` });
+                        }
+                    } else {
+                        updateServerView({ analysis, verification: `❌ DENEGADO: Header no especifica alg: 'none'.` });
+                    }
+                } catch (err) {
+                    updateServerView({ analysis: `❌ ERROR: Token malformado.\n${err.message}` });
+                }
+            }
+            
+            async function initLevel3() {
+                const token = await new jose.SignJWT({ user: 'user123' }).setProtectedHeader({ alg: 'HS256' }).sign(state.level3.secret);
+                state.level3.tokenToCrack = token;
+                document.getElementById('l3-tokenToCrack').textContent = token;
+            }
+
+            function startLevel3BruteForce() {
+                const crackerConsole = document.getElementById('cracker-console');
+                document.getElementById('cracker-console-container').style.display = 'block';
+                const wordlist = ['password', '123456', 'qwerty', 'secret', 'admin', 'secret123', 'dragon'];
+                crackerConsole.innerHTML = '';
+                let i = 0;
+                const intervalId = setInterval(() => {
+                    if (i >= wordlist.length) {
+                        clearInterval(intervalId);
+                        crackerConsole.innerHTML += `\nAtaque finalizado.`;
+                        return;
+                    }
+                    const word = wordlist[i];
+                    const isCorrect = (word === new TextDecoder().decode(state.level3.secret));
+                    crackerConsole.innerHTML += `Probando clave: '${word}'... ${isCorrect ? '<span class="success">✅ ¡Clave encontrada!</span>' : '❌'}\n`;
+                    if (isCorrect) clearInterval(intervalId);
+                    i++;
+                }, 400);
+            }
+
+            async function verifyLevel3() {
+                const token = document.getElementById('l3-forgedToken').value.trim();
+                if (!token) return updateServerView({ analysis: 'ERROR: No se recibió ningún token.' });
+                try {
+                    const { payload } = await jose.jwtVerify(token, state.level3.secret);
+                    const analysis = `Token recibido. Verificando con clave secreta...`;
+                    const verification = `<span class="success">✅ ¡Firma VÁLIDA!</span>`;
+                    if (payload.user === 'admin') {
+                        updateServerView({ analysis, verification, response: `✅ ÉXITO: Usuario es 'admin'. Acceso concedido.` });
+                        markLevelAsCompleted('level3');
+                    } else {
+                        updateServerView({ analysis, verification, response: `❌ DENEGADO: Usuario '${payload.user}' no es 'admin'.` });
+                    }
+                } catch (err) {
+                    updateServerView({ analysis: 'Token recibido...', verification: `❌ ERROR: ¡Firma INVÁLIDA!` });
+                }
+            }
+
+            async function generateAndShowLevel4Keys() {
+                updateServerView({ analysis: 'Generando par de claves RSA-256...' });
+                const { publicKey, privateKey } = await jose.generateKeyPair('RS256');
+                state.level4.keys = { publicKey, privateKey };
+                const publicJwk = await jose.exportJWK(publicKey);
+                publicJwk.kid = 'attacker-key-' + Math.random().toString(36).substring(2, 8);
+                document.getElementById('l4-publicKey').textContent = JSON.stringify(publicJwk, null, 2);
+                document.getElementById('l4-keysDisplay').style.display = 'block';
+                updateServerView({ analysis: 'Par de claves generado. Usa la clave pública en el header `jwk` y la privada para firmar (puedes usar jwt.io).' });
+            }
+
+            async function verifyLevel4() {
+                const token = document.getElementById('l4-maliciousToken').value.trim();
+                if (!token) return updateServerView({ analysis: 'ERROR: No se recibió ningún token.' });
+                try {
+                    const header = jose.decodeProtectedHeader(token);
+                    if (!header.jwk) throw new Error("Header no contiene parámetro 'jwk'.");
+                    const analysis = `Token recibido.\nHeader: ${JSON.stringify(header, null, 2)}`;
+                    const verification = `ⓘ Se detectó 'jwk' en el header.\nⓘ Importando clave pública del token...`;
+                    const publicKeyFromToken = await jose.importJWK(header.jwk, header.alg);
+                    const { payload } = await jose.jwtVerify(token, publicKeyFromToken);
+                    const finalVerification = `${verification}\n<span class="success">✅ ¡La firma coincide con la clave pública proporcionada!</span>`;
+                    if (payload.sub === 'admin' || payload.role === 'admin' || payload.user === 'admin') {
+                        updateServerView({ analysis, verification: finalVerification, response: `✅ ÉXITO: Acceso de admin concedido.` });
+                        markLevelAsCompleted('level4');
+                    } else {
+                        updateServerView({ analysis, verification: finalVerification, response: `❌ DENEGADO: Payload no es de admin.` });
+                    }
+                } catch (err) {
+                    updateServerView({ analysis: `❌ ERROR: No se pudo validar el token.\n${err.message}` });
+                }
+            }
+            
+            // --- FUNCIONES DE DEBUG ---
+            function unlockAllChallenges() {
+                document.querySelectorAll('.challenge.locked').forEach(el => el.classList.remove('locked'));
+                updateServerView({ analysis: 'Todos los desafíos han sido desbloqueados.' });
+            }
+            
+            async function solveAllChallenges() {
+                // Nivel 1
+                const payload1 = btoa(JSON.stringify({role: 'admin'})).replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_');
+                document.getElementById('l1-modifiedToken').value = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.${payload1}.invalid_signature`;
+                // Nivel 2
+                document.getElementById('l2-noneToken').value = 'eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJyb2xlIjoiYWRtaW4ifQ.';
+                // Nivel 3
+                const token3 = await new jose.SignJWT({ user: 'admin' }).setProtectedHeader({ alg: 'HS256' }).sign(state.level3.secret);
+                document.getElementById('l3-forgedToken').value = token3;
+                // Nivel 4
+                if (!state.level4.keys) await generateAndShowLevel4Keys();
+                const publicJwk = JSON.parse(document.getElementById('l4-publicKey').textContent);
+                const token4 = await new jose.SignJWT({ user: 'admin' }).setProtectedHeader({ alg: 'RS256', jwk: publicJwk }).sign(state.level4.keys.privateKey);
+                document.getElementById('l4-maliciousToken').value = token4;
+                
+                updateServerView({ analysis: 'Soluciones aplicadas en todos los campos.' });
+            }
+        });
+    </script>
+</body>
+</html>

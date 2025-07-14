@@ -547,6 +547,50 @@
         .error { color: var(--accent-red); }
         .info { color: var(--accent-orange); }
 
+        /* Pie de página */
+        .footer {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-top: 2px solid #334155;
+            margin-top: 3rem;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .footer-text {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .footer-text .text-primary {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-text .text-primary:hover {
+            color: var(--accent-green);
+        }
+        
+        .footer-heart {
+            color: #ef4444;
+            font-size: 1.1rem;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
         @media (max-width: 1024px) {
             .main-grid {
                 grid-template-columns: 1fr;
@@ -641,6 +685,19 @@
             
             .jwt-parts {
                 grid-template-columns: 1fr;
+            }
+            
+            .footer {
+                padding: 1.5rem 0;
+                margin-top: 2rem;
+            }
+            
+            .footer-content {
+                padding: 0 1rem;
+            }
+            
+            .footer-text {
+                font-size: 0.85rem;
             }
         }
 
@@ -769,6 +826,19 @@
                 font-size: 0.75rem;
                 padding: 0.75rem;
             }
+            
+            .footer {
+                padding: 1rem 0;
+                margin-top: 1.5rem;
+            }
+            
+            .footer-content {
+                padding: 0 0.5rem;
+            }
+            
+            .footer-text {
+                font-size: 0.8rem;
+            }
         }
         
         @media (max-width: 320px) {
@@ -811,6 +881,19 @@
             
             .challenge {
                 padding: 0.75rem;
+            }
+            
+            .footer {
+                padding: 0.75rem 0;
+                margin-top: 1rem;
+            }
+            
+            .footer-content {
+                padding: 0 0.25rem;
+            }
+            
+            .footer-text {
+                font-size: 0.75rem;
             }
         }
     </style>
@@ -1516,5 +1599,15 @@
             }
         });
     </script>
+    
+    <!-- Pie de página -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-text">
+                Simulador Educativo de JWT <br>
+                made with <span class="footer-heart">❤️</span> by <a href="https://www.linkedin.com/in/martin-munoz/" target="_blank" class="text-primary">Martin Muñoz</a>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

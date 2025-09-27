@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Laboratorio de Hacking: JWT</title>
-    <!-- Librería JOSE para manejar operaciones JWT en el cliente -->
+    <!-- Librerías criptográficas -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jose/4.14.4/index.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrsasign/10.9.0/jsrsasign-all-min.js"></script>
     <style>
         :root {
             --bg-dark: #1a1b26;
@@ -1239,6 +1240,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const cryptoHelpers = initializeCryptoHelpers();
             const state = {
                 completedLevels: new Set(),
                 level3: { secret: new TextEncoder().encode('secret123'), tokenToCrack: '' },
@@ -1336,7 +1338,9 @@
             // --- LÓGICA DE DESAFÍOS ---
             async function generateAndShowLevel1Token() {
                 const secret = new TextEncoder().encode('un-secreto-fuerte');
-                const token = await new jose.SignJWT({ role: 'user', userId: 'user123' }).setProtectedHeader({ alg: 'HS256' }).setIssuedAt().setExpirationTime('2h').sign(secret);
+                const now = Math.floor(Date.now() / 1000);
+                const payload = { role: 'user', userId: 'user123', iat: now, exp: now + 2 * 60 * 60 };
+                const token = await cryptoHelpers.signHS256(payload, secret);
                 document.getElementById('l1-tokenArea').value = token;
                 updateServerView({ analysis: 'Token de usuario generado y entregado al cliente.' });
             }
@@ -1388,7 +1392,7 @@
             }
             
             async function initLevel3() {
-                const token = await new jose.SignJWT({ user: 'user123' }).setProtectedHeader({ alg: 'HS256' }).sign(state.level3.secret);
+                const token = await cryptoHelpers.signHS256({ user: 'user123' }, state.level3.secret);
                 state.level3.tokenToCrack = token;
                 document.getElementById('l3-tokenToCrack').textContent = token;
             }
@@ -1417,7 +1421,7 @@
                 const token = document.getElementById('l3-forgedToken').value.trim();
                 if (!token) return updateServerView({ analysis: 'ERROR: No se recibió ningún token.' });
                 try {
-                    const { payload } = await jose.jwtVerify(token, state.level3.secret);
+                    const { payload } = await cryptoHelpers.verifyHS256(token, state.level3.secret);
                     const analysis = `Token recibido. Verificando con clave secreta...`;
                     const verification = `<span class="success">✅ ¡Firma VÁLIDA!</span>`;
                     if (payload.user === 'admin') {
@@ -1433,9 +1437,8 @@
 
             async function generateAndShowLevel4Keys() {
                 updateServerView({ analysis: 'Generando par de claves RSA-256...' });
-                const { publicKey, privateKey } = await jose.generateKeyPair('RS256');
-                state.level4.keys = { publicKey, privateKey };
-                const publicJwk = await jose.exportJWK(publicKey);
+                const { publicKey, privateKey, publicJwk } = await cryptoHelpers.generateRS256KeyPair();
+                state.level4.keys = { publicKey, privateKey, publicJwk };
                 publicJwk.kid = 'attacker-key-' + Math.random().toString(36).substring(2, 8);
                 document.getElementById('l4-publicKey').textContent = JSON.stringify(publicJwk, null, 2);
                 document.getElementById('l4-keysDisplay').style.display = 'block';
@@ -1450,8 +1453,8 @@
                     if (!header.jwk) throw new Error("Header no contiene parámetro 'jwk'.");
                     const analysis = `Token recibido.\nHeader: ${JSON.stringify(header, null, 2)}`;
                     const verification = `ⓘ Se detectó 'jwk' en el header.\nⓘ Importando clave pública del token...`;
-                    const publicKeyFromToken = await jose.importJWK(header.jwk, header.alg);
-                    const { payload } = await jose.jwtVerify(token, publicKeyFromToken);
+                    const publicKeyFromToken = await cryptoHelpers.importPublicJwk(header.jwk, header.alg);
+                    const { payload } = await cryptoHelpers.verifyWithKey(token, publicKeyFromToken);
                     const finalVerification = `${verification}\n<span class="success">✅ ¡La firma coincide con la clave pública proporcionada!</span>`;
                     if (payload.sub === 'admin' || payload.role === 'admin' || payload.user === 'admin') {
                         updateServerView({ analysis, verification: finalVerification, response: `✅ ÉXITO: Acceso de admin concedido.` });
@@ -1587,15 +1590,85 @@
                 // Nivel 2
                 document.getElementById('l2-noneToken').value = 'eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJyb2xlIjoiYWRtaW4ifQ.';
                 // Nivel 3
-                const token3 = await new jose.SignJWT({ user: 'admin' }).setProtectedHeader({ alg: 'HS256' }).sign(state.level3.secret);
+                const token3 = await cryptoHelpers.signHS256({ user: 'admin' }, state.level3.secret);
                 document.getElementById('l3-forgedToken').value = token3;
                 // Nivel 4
                 if (!state.level4.keys) await generateAndShowLevel4Keys();
                 const publicJwk = JSON.parse(document.getElementById('l4-publicKey').textContent);
-                const token4 = await new jose.SignJWT({ user: 'admin' }).setProtectedHeader({ alg: 'RS256', jwk: publicJwk }).sign(state.level4.keys.privateKey);
+                const token4 = await cryptoHelpers.signRS256WithJwk({ user: 'admin' }, state.level4.keys.privateKey, publicJwk);
                 document.getElementById('l4-maliciousToken').value = token4;
-                
+
                 updateServerView({ analysis: 'Soluciones aplicadas en todos los campos.' });
+            }
+
+            function initializeCryptoHelpers() {
+                const supportsWebCrypto = typeof window !== 'undefined' && window.crypto && window.crypto.subtle && typeof window.CryptoKey !== 'undefined';
+                if (supportsWebCrypto) {
+                    return {
+                        mode: 'webcrypto',
+                        async signHS256(payload, secret) {
+                            return await new jose.SignJWT(payload).setProtectedHeader({ alg: 'HS256' }).sign(secret);
+                        },
+                        async verifyHS256(token, secret) {
+                            return await jose.jwtVerify(token, secret);
+                        },
+                        async generateRS256KeyPair() {
+                            const { publicKey, privateKey } = await jose.generateKeyPair('RS256');
+                            const publicJwk = await jose.exportJWK(publicKey);
+                            return { publicKey, privateKey, publicJwk };
+                        },
+                        async importPublicJwk(jwk, alg) {
+                            return await jose.importJWK(jwk, alg);
+                        },
+                        async verifyWithKey(token, key) {
+                            return await jose.jwtVerify(token, key);
+                        },
+                        async signRS256WithJwk(payload, privateKey, jwk) {
+                            return await new jose.SignJWT(payload).setProtectedHeader({ alg: 'RS256', jwk }).sign(privateKey);
+                        }
+                    };
+                }
+
+                if (typeof KJUR === 'undefined' || typeof KEYUTIL === 'undefined') {
+                    throw new Error('Entorno inseguro: no se pudo cargar la librería de respaldo jsrsasign.');
+                }
+
+                const textDecoder = new TextDecoder();
+                console.warn('WebCrypto API no disponible: usando biblioteca jsrsasign como respaldo.');
+
+                return {
+                    mode: 'jsrsasign',
+                    async signHS256(payload, secret) {
+                        const header = { alg: 'HS256', typ: 'JWT' };
+                        const secretString = typeof secret === 'string' ? secret : textDecoder.decode(secret);
+                        return KJUR.jws.JWS.sign('HS256', JSON.stringify(header), JSON.stringify(payload), secretString);
+                    },
+                    async verifyHS256(token, secret) {
+                        const secretString = typeof secret === 'string' ? secret : textDecoder.decode(secret);
+                        const isValid = KJUR.jws.JWS.verifyJWT(token, secretString, { alg: ['HS256'] });
+                        if (!isValid) throw new Error('Firma inválida');
+                        const parsed = KJUR.jws.JWS.parse(token);
+                        return { payload: parsed.payloadObj };
+                    },
+                    async generateRS256KeyPair() {
+                        const keyPair = KEYUTIL.generateKeypair('RSA', 2048);
+                        const publicJwk = KEYUTIL.getJWK(keyPair.pubKeyObj);
+                        return { publicKey: keyPair.pubKeyObj, privateKey: keyPair.prvKeyObj, publicJwk };
+                    },
+                    async importPublicJwk(jwk) {
+                        return KEYUTIL.getKey(jwk);
+                    },
+                    async verifyWithKey(token, key) {
+                        const isValid = KJUR.jws.JWS.verifyJWT(token, key, { alg: ['RS256'] });
+                        if (!isValid) throw new Error('Firma inválida');
+                        const parsed = KJUR.jws.JWS.parse(token);
+                        return { payload: parsed.payloadObj };
+                    },
+                    async signRS256WithJwk(payload, privateKey, jwk) {
+                        const header = { alg: 'RS256', typ: 'JWT', jwk };
+                        return KJUR.jws.JWS.sign('RS256', JSON.stringify(header), JSON.stringify(payload), privateKey);
+                    }
+                };
             }
         });
     </script>

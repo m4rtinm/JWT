@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,7 +29,8 @@
             margin: 0;
             padding: 0;
             line-height: 1.6;
-            overflow-x: hidden; /* Prevenir scroll horizontal */
+            overflow-x: hidden;
+            /* Prevenir scroll horizontal */
         }
 
         /* Barra de navegación superior */
@@ -39,7 +41,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
         .navbar-content {
@@ -171,10 +173,10 @@
         .challenge.completed {
             border-left-color: var(--accent-green);
         }
-        
+
         .challenge.active {
-             border-left-color: var(--accent-blue);
-             box-shadow: 0 0 20px rgba(122, 162, 247, 0.2);
+            border-left-color: var(--accent-blue);
+            box-shadow: 0 0 20px rgba(122, 162, 247, 0.2);
         }
 
         .challenge-header {
@@ -189,7 +191,7 @@
             color: var(--text-main);
             font-size: 1.25rem;
         }
-        
+
         .difficulty-badge {
             display: inline-flex;
             align-items: center;
@@ -215,32 +217,32 @@
             filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
         }
 
-        .tag-principiante { 
+        .tag-principiante {
             background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
             color: #ffffff;
             border-color: #16a34a;
         }
-        
-        .tag-intermedio { 
+
+        .tag-intermedio {
             background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
             color: #ffffff;
             border-color: #ea580c;
         }
-        
-        .tag-avanzado { 
+
+        .tag-avanzado {
             background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
             color: #ffffff;
             border-color: #dc2626;
         }
 
         .mission {
-            background-color: rgba(0,0,0,0.2);
+            background-color: rgba(0, 0, 0, 0.2);
             padding: 0.75rem 1rem;
             border-left: 3px solid var(--accent-orange);
             border-radius: 4px;
             margin-bottom: 1rem;
         }
-        
+
         .mission code {
             background-color: #16161e;
             padding: 2px 5px;
@@ -271,7 +273,8 @@
             background-color: var(--text-dim);
         }
 
-        textarea, input[type="text"] {
+        textarea,
+        input[type="text"] {
             background-color: var(--bg-input);
             color: var(--text-main);
             border: 1px solid var(--border-color);
@@ -283,7 +286,8 @@
 
         .server-column {
             position: sticky;
-            top: calc(80px + 1.5rem); /* Altura de la barra superior + margen */
+            top: calc(80px + 1.5rem);
+            /* Altura de la barra superior + margen */
         }
 
         .server-view {
@@ -292,7 +296,7 @@
             border-radius: 8px;
             padding: 1.5rem;
         }
-        
+
         .server-view h3 {
             margin-top: 0;
             border-bottom: 1px solid var(--border-color);
@@ -331,14 +335,22 @@
             background-color: var(--bg-panel);
             border-radius: 8px;
         }
-        .debug-menu h3 { margin-top: 0; }
-        .debug-menu .buttons { display: flex; justify-content: center; gap: 1rem; }
-        
+
+        .debug-menu h3 {
+            margin-top: 0;
+        }
+
+        .debug-menu .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
         .debug-toggle {
             margin-top: 2rem;
             text-align: center;
         }
-        
+
         .debug-toggle button {
             background-color: var(--bg-input);
             color: var(--text-dim);
@@ -348,16 +360,16 @@
             font-size: 0.9rem;
             transition: all 0.2s;
         }
-        
+
         .debug-toggle button:hover {
             background-color: var(--border-color);
             color: var(--text-main);
         }
-        
+
         .debug-options {
             display: none;
         }
-        
+
         .debug-options.visible {
             display: block;
         }
@@ -370,19 +382,19 @@
             border: 1px solid #4c1d95;
             margin-top: 2rem;
         }
-        
+
         .learning-header {
             text-align: center;
             margin-bottom: 2rem;
         }
-        
+
         .learning-header h2 {
             color: #a78bfa;
             font-size: 2rem;
             margin-bottom: 1rem;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
-        
+
         .learning-nav {
             display: flex;
             justify-content: center;
@@ -390,7 +402,7 @@
             margin-bottom: 2rem;
             flex-wrap: wrap;
         }
-        
+
         .learning-nav button {
             background-color: var(--bg-panel);
             color: var(--text-main);
@@ -401,29 +413,29 @@
             transition: all 0.3s;
             font-size: 0.9rem;
         }
-        
+
         .learning-nav button:hover,
         .learning-nav button.active {
             background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
             border-color: #7c3aed;
             color: white;
         }
-        
+
         .learning-content {
-            background-color: rgba(0,0,0,0.3);
+            background-color: rgba(0, 0, 0, 0.3);
             padding: 2rem;
             border-radius: 10px;
             border: 1px solid #4c1d95;
         }
-        
+
         .theory-section {
             display: none;
         }
-        
+
         .theory-section.active {
             display: block;
         }
-        
+
         .theory-section h3 {
             color: #a78bfa;
             font-size: 1.5rem;
@@ -431,19 +443,19 @@
             border-bottom: 2px solid #4c1d95;
             padding-bottom: 0.5rem;
         }
-        
+
         .theory-section h4 {
             color: #c4b5fd;
             font-size: 1.2rem;
             margin: 1.5rem 0 1rem 0;
         }
-        
+
         .theory-section p {
             line-height: 1.7;
             margin-bottom: 1rem;
             color: var(--text-main);
         }
-        
+
         .jwt-structure {
             background-color: var(--bg-panel);
             padding: 1.5rem;
@@ -451,14 +463,14 @@
             margin: 1rem 0;
             border-left: 4px solid #7c3aed;
         }
-        
+
         .jwt-parts {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1rem;
             margin: 1rem 0;
         }
-        
+
         .jwt-part {
             background: linear-gradient(135deg, #059669 0%, #047857 100%);
             padding: 1rem;
@@ -466,19 +478,19 @@
             text-align: center;
             color: white;
         }
-        
+
         .jwt-part.header {
             background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
         }
-        
+
         .jwt-part.payload {
             background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
         }
-        
+
         .jwt-part.signature {
             background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
         }
-        
+
         .vulnerability-card {
             background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%);
             padding: 1.5rem;
@@ -486,45 +498,45 @@
             margin: 1rem 0;
             border-left: 4px solid #ef4444;
         }
-        
+
         .vulnerability-card h4 {
             color: #fca5a5;
             margin-top: 0;
         }
-        
+
         .tools-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
             margin: 1.5rem 0;
         }
-        
+
         .tool-card {
             background: linear-gradient(135deg, #065f46 0%, #047857 100%);
             padding: 1.5rem;
             border-radius: 10px;
             transition: transform 0.3s;
         }
-        
+
         .tool-card:hover {
             transform: translateY(-5px);
         }
-        
+
         .tool-card h4 {
             color: #6ee7b7;
             margin-top: 0;
         }
-        
+
         .tool-card a {
             color: #a7f3d0;
             text-decoration: none;
             font-weight: bold;
         }
-        
+
         .tool-card a:hover {
             color: #6ee7b7;
         }
-        
+
         .code-example {
             background-color: #0f172a;
             padding: 1rem;
@@ -535,7 +547,7 @@
             margin: 1rem 0;
             overflow-x: auto;
         }
-        
+
         .highlight {
             background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
             color: #1f2937;
@@ -544,9 +556,17 @@
             font-weight: bold;
         }
 
-        .success { color: var(--accent-green); }
-        .error { color: var(--accent-red); }
-        .info { color: var(--accent-orange); }
+        .success {
+            color: var(--accent-green);
+        }
+
+        .error {
+            color: var(--accent-red);
+        }
+
+        .info {
+            color: var(--accent-orange);
+        }
 
         /* Pie de página */
         .footer {
@@ -556,46 +576,55 @@
             padding: 2rem 0;
             text-align: center;
         }
-        
+
         .footer-content {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
         }
-        
+
         .footer-text {
             color: var(--text-dim);
             font-size: 0.9rem;
             line-height: 1.6;
         }
-        
+
         .footer-text .text-primary {
             color: var(--accent-blue);
             text-decoration: none;
             font-weight: 600;
             transition: color 0.3s ease;
         }
-        
+
         .footer-text .text-primary:hover {
             color: var(--accent-green);
         }
-        
+
         .footer-heart {
             color: #ef4444;
             font-size: 1.1rem;
             animation: heartbeat 1.5s ease-in-out infinite;
         }
-        
+
         @keyframes heartbeat {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
 
         @media (max-width: 1024px) {
             .main-grid {
                 grid-template-columns: 1fr;
             }
+
             .server-column {
                 position: static;
             }
@@ -603,100 +632,101 @@
 
         @media (max-width: 768px) {
             .server-column {
-                position: static; /* Cambiar a static en móvil */
+                position: static;
+                /* Cambiar a static en móvil */
             }
-            
+
             .navbar-content {
                 padding: 0.75rem 1rem;
                 flex-direction: column;
                 text-align: center;
                 gap: 1rem;
             }
-            
+
             .navbar-brand {
                 font-size: 1.25rem;
             }
-            
+
             .navbar-nav {
                 width: 100%;
                 justify-content: center;
             }
-            
+
             .nav-button {
                 padding: 0.5rem 1rem;
                 font-size: 0.9rem;
                 flex: 1;
                 max-width: 150px;
             }
-            
+
             .main-container {
                 padding: 1rem;
             }
-            
+
             .main-grid {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
             }
-            
+
             .challenge-header {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 0.5rem;
             }
-            
+
             .challenge-header h2 {
                 font-size: 1.1rem;
             }
-            
+
             .difficulty-badge {
                 align-self: flex-start;
             }
-            
+
             .lab-header h1 {
                 font-size: 1.75rem;
             }
-            
+
             .progress-bar-container {
                 width: 95%;
             }
-            
+
             textarea {
                 font-size: 0.9rem;
                 min-height: 80px;
             }
-            
+
             button {
                 padding: 12px 16px;
                 font-size: 0.9rem;
             }
-            
+
             .learning-nav {
                 flex-direction: column;
                 align-items: center;
             }
-            
+
             .learning-nav button {
                 width: 100%;
                 max-width: 200px;
             }
-            
+
             .tools-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .jwt-parts {
                 grid-template-columns: 1fr;
             }
-            
+
             .footer {
                 padding: 1.5rem 0;
                 margin-top: 2rem;
             }
-            
+
             .footer-content {
                 padding: 0 1rem;
             }
-            
+
             .footer-text {
                 font-size: 0.85rem;
             }
@@ -706,199 +736,202 @@
             .navbar-content {
                 padding: 0.5rem;
             }
-            
+
             .navbar-brand {
                 font-size: 1rem;
                 gap: 0.25rem;
             }
-            
+
             .nav-button {
                 padding: 0.5rem 0.75rem;
                 font-size: 0.8rem;
                 border-radius: 15px;
                 min-width: 120px;
             }
-            
+
             .main-container {
                 padding: 0.5rem;
             }
-            
+
             .lab-header h1 {
                 font-size: 1.5rem;
             }
-            
+
             .lab-header p {
                 font-size: 0.9rem;
             }
-            
+
             .challenge {
                 padding: 1rem;
                 margin-bottom: 1rem;
             }
-            
+
             .challenge-header h2 {
                 font-size: 1rem;
             }
-            
+
             .difficulty-badge {
                 padding: 0.25rem 0.5rem;
                 font-size: 0.7rem;
             }
-            
+
             .mission {
                 padding: 0.5rem;
                 font-size: 0.9rem;
             }
-            
+
             button {
                 padding: 10px 12px;
                 font-size: 0.85rem;
                 width: 100%;
                 margin-bottom: 0.5rem;
             }
-            
+
             textarea {
                 font-size: 0.8rem;
                 padding: 8px;
                 min-height: 70px;
             }
-            
+
             pre {
                 font-size: 0.75rem;
                 padding: 0.75rem;
                 overflow-x: auto;
             }
-            
+
             .server-view {
                 padding: 1rem;
             }
-            
+
             .server-view h3 {
                 font-size: 1rem;
             }
-            
+
             .server-log-section h4 {
                 font-size: 0.8rem;
             }
-            
+
             .debug-menu {
                 padding: 1rem;
             }
-            
+
             .debug-menu .buttons {
                 flex-direction: column;
                 gap: 0.5rem;
             }
-            
+
             .debug-menu button {
                 width: 100%;
             }
-            
+
             .learning-section {
                 padding: 1rem;
                 margin-top: 1rem;
             }
-            
+
             .learning-header h2 {
                 font-size: 1.5rem;
             }
-            
+
             .learning-content {
                 padding: 1rem;
             }
-            
+
             .theory-section h3 {
                 font-size: 1.25rem;
             }
-            
+
             .theory-section h4 {
                 font-size: 1rem;
             }
-            
-            .tool-card, .vulnerability-card, .jwt-structure {
+
+            .tool-card,
+            .vulnerability-card,
+            .jwt-structure {
                 padding: 1rem;
             }
-            
+
             .jwt-part {
                 padding: 0.75rem;
             }
-            
+
             .code-example {
                 font-size: 0.75rem;
                 padding: 0.75rem;
             }
-            
+
             .footer {
                 padding: 1rem 0;
                 margin-top: 1.5rem;
             }
-            
+
             .footer-content {
                 padding: 0 0.5rem;
             }
-            
+
             .footer-text {
                 font-size: 0.8rem;
             }
         }
-        
+
         @media (max-width: 320px) {
             .navbar-brand {
                 font-size: 0.9rem;
             }
-            
+
             .nav-button {
                 padding: 0.4rem 0.6rem;
                 font-size: 0.75rem;
                 min-width: 100px;
             }
-            
+
             .lab-header h1 {
                 font-size: 1.25rem;
             }
-            
+
             .challenge-header h2 {
                 font-size: 0.9rem;
             }
-            
+
             .difficulty-badge {
                 padding: 0.2rem 0.4rem;
                 font-size: 0.65rem;
             }
-            
+
             .mission {
                 padding: 0.4rem;
                 font-size: 0.85rem;
             }
-            
+
             button {
                 padding: 8px 10px;
                 font-size: 0.8rem;
             }
-            
+
             .main-container {
                 padding: 0.25rem;
             }
-            
+
             .challenge {
                 padding: 0.75rem;
             }
-            
+
             .footer {
                 padding: 0.75rem 0;
                 margin-top: 1rem;
             }
-            
+
             .footer-content {
                 padding: 0 0.25rem;
             }
-            
+
             .footer-text {
                 font-size: 0.75rem;
             }
         }
     </style>
 </head>
+
 <body>
     <!-- Barra de navegación superior -->
     <nav class="top-navbar">
@@ -931,311 +964,358 @@
 
             <main class="main-grid">
                 <!-- ...existing code... -->
-        <div class="challenges-column">
-            <!-- Nivel 1: Firma no Verificada -->
-            <section class="challenge active" id="level1">
-                <div class="challenge-header">
-                    <h2>Nivel 1: El API Confiado</h2>
-                    <span class="difficulty-badge tag-principiante">
-                        <span class="stars">⭐</span>
-                        Principiante
-                    </span>
-                </div>
-                <p class="mission"><b>Misión:</b> La API no verifica la firma. Modifica el payload del token para acceder como <code>admin</code>.</p>
-                <div class="challenge-content">
-                    <button data-action="l1-getToken">1. Generar mi Token de "user"</button>
-                    <textarea id="l1-tokenArea" rows="4" readonly placeholder="Aquí aparecerá tu token..."></textarea>
-                    <label for="l1-modifiedToken">2. Pega aquí tu token modificado:</label>
-                    <textarea id="l1-modifiedToken" rows="4" placeholder="Usa jwt.io para cambiar el payload a {'role':'admin'}"></textarea>
-                    <button data-action="l1-verify">🔬 Verificar Acceso</button>
-                </div>
-            </section>
+                <div class="challenges-column">
+                    <!-- Nivel 1: Firma no Verificada -->
+                    <section class="challenge active" id="level1">
+                        <div class="challenge-header">
+                            <h2>Nivel 1: El API Confiado</h2>
+                            <span class="difficulty-badge tag-principiante">
+                                <span class="stars">⭐</span>
+                                Principiante
+                            </span>
+                        </div>
+                        <p class="mission"><b>Misión:</b> La API no verifica la firma. Modifica el payload del token
+                            para acceder como <code>admin</code>.</p>
+                        <div class="challenge-content">
+                            <button data-action="l1-getToken">1. Generar mi Token de "user"</button>
+                            <textarea id="l1-tokenArea" rows="4" readonly
+                                placeholder="Aquí aparecerá tu token..."></textarea>
+                            <label for="l1-modifiedToken">2. Pega aquí tu token modificado:</label>
+                            <textarea id="l1-modifiedToken" rows="4"
+                                placeholder="Usa jwt.io para cambiar el payload a {'role':'admin'}"></textarea>
+                            <button data-action="l1-verify">🔬 Verificar Acceso</button>
+                        </div>
+                    </section>
 
-            <!-- Nivel 2: Algoritmo "none" -->
-            <section class="challenge locked" id="level2">
-                <div class="challenge-header">
-                    <h2>Nivel 2: El Algoritmo "ninguno"</h2>
-                    <span class="difficulty-badge tag-principiante">
-                        <span class="stars">⭐</span>
-                        Principiante
-                    </span>
-                </div>
-                <p class="mission"><b>Misión:</b> La API acepta tokens con <code>alg:none</code>. Forja un token sin firma para reclamar la recompensa de <code>admin</code>.</p>
-                <div class="challenge-content">
-                     <label for="l2-noneToken">Pega tu token forjado con <code>alg:none</code>:</label>
-                    <textarea id="l2-noneToken" rows="4" placeholder="Ej: eyJhbGciOiJub25lIn0.eyJyb2xlIjoiYWRtaW4ifQ."></textarea>
-                    <button data-action="l2-verify">🎁 Reclamar Recompensa</button>
-                </div>
-            </section>
+                    <!-- Nivel 2: Algoritmo "none" -->
+                    <section class="challenge locked" id="level2">
+                        <div class="challenge-header">
+                            <h2>Nivel 2: El Algoritmo "ninguno"</h2>
+                            <span class="difficulty-badge tag-principiante">
+                                <span class="stars">⭐</span>
+                                Principiante
+                            </span>
+                        </div>
+                        <p class="mission"><b>Misión:</b> La API acepta tokens con <code>alg:none</code>. Forja un token
+                            sin firma para reclamar la recompensa de <code>admin</code>.</p>
+                        <div class="challenge-content">
+                            <label for="l2-noneToken">Pega tu token forjado con <code>alg:none</code>:</label>
+                            <textarea id="l2-noneToken" rows="4"
+                                placeholder="Ej: eyJhbGciOiJub25lIn0.eyJyb2xlIjoiYWRtaW4ifQ."></textarea>
+                            <button data-action="l2-verify">🎁 Reclamar Recompensa</button>
+                        </div>
+                    </section>
 
-            <!-- Nivel 3: Secreto Débil -->
-            <section class="challenge locked" id="level3">
-                 <div class="challenge-header">
-                    <h2>Nivel 3: El Secreto Débil</h2>
-                    <span class="difficulty-badge tag-intermedio">
-                        <span class="stars">⭐⭐</span>
-                        Intermedio
-                    </span>
-                </div>
-                <p class="mission"><b>Misión:</b> El token está firmado con una clave débil. Encuéntrala, forja un token de <code>admin</code> y fírmalo.</p>
-                <div class="challenge-content">
-                    <p>1. Token a crackear:</p>
-                    <pre><code id="l3-tokenToCrack"></code></pre>
-                    <button data-action="l3-bruteforce">2. Iniciar Ataque de Fuerza Bruta</button>
-                    <label for="l3-forgedToken">3. Pega tu token de admin firmado con la clave encontrada:</label>
-                    <textarea id="l3-forgedToken" rows="4" placeholder="Usa la clave encontrada para firmar un nuevo token con payload {'user':'admin'}"></textarea>
-                    <button data-action="l3-verify">🔑 Acceder al Panel</button>
-                </div>
-            </section>
+                    <!-- Nivel 3: Secreto Débil -->
+                    <section class="challenge locked" id="level3">
+                        <div class="challenge-header">
+                            <h2>Nivel 3: El Secreto Débil</h2>
+                            <span class="difficulty-badge tag-intermedio">
+                                <span class="stars">⭐⭐</span>
+                                Intermedio
+                            </span>
+                        </div>
+                        <p class="mission"><b>Misión:</b> El token está firmado con una clave débil. Encuéntrala, forja
+                            un token de <code>admin</code> y fírmalo.</p>
+                        <div class="challenge-content">
+                            <p>1. Token a crackear:</p>
+                            <pre><code id="l3-tokenToCrack"></code></pre>
+                            <button data-action="l3-bruteforce">2. Iniciar Ataque de Fuerza Bruta</button>
+                            <label for="l3-forgedToken">3. Pega tu token de admin firmado con la clave
+                                encontrada:</label>
+                            <textarea id="l3-forgedToken" rows="4"
+                                placeholder="Usa la clave encontrada para firmar un nuevo token con payload {'user':'admin'}"></textarea>
+                            <button data-action="l3-verify">🔑 Acceder al Panel</button>
+                        </div>
+                    </section>
 
-            <!-- Nivel 4: Inyección JWK -->
-            <section class="challenge locked" id="level4">
-                <div class="challenge-header">
-                    <h2>Nivel 4: La Verificación Flexible</h2>
-                    <span class="difficulty-badge tag-avanzado">
-                        <span class="stars">⭐⭐⭐</span>
-                        Avanzado
-                    </span>
+                    <!-- Nivel 4: Key Confusion -->
+                    <section class="challenge locked" id="level4">
+                        <div class="challenge-header">
+                            <h2>Nivel 4: Confusión de Algoritmo (Key Confusion)</h2>
+                            <span class="difficulty-badge tag-avanzado">
+                                <span class="stars">⭐⭐⭐</span>
+                                Avanzado
+                            </span>
+                        </div>
+                        <p class="mission"><b>Misión:</b> El servidor expone su Clave Pública para verificar tokens
+                            RS256. Pero... ¿qué pasa si le envías un token HS256?</p>
+                        <div class="challenge-content">
+                            <button data-action="l4-genKeys">1. Obtener Clave Pública del Servidor</button>
+                            <div id="l4-keysDisplay" style="display:none;">
+                                <p><strong>Clave Pública del Servidor (PEM):</strong></p>
+                                <pre><code id="l4-publicPem" style="font-size: 0.7em; white-space: pre-wrap;"></code></pre>
+                            </div>
+
+                            <button data-action="l4-getToken" id="l4-btnGetToken"
+                                style="display:none; margin: 10px 0;">2. Obtener Token Válido (RS256)</button>
+                            <div id="l4-tokenDisplay" style="display:none; word-break: break-all;">
+                                <p>Token de usuario (firmado con RS256):</p>
+                                <pre><code id="l4-validToken" style="font-size: 0.8em;"></code></pre>
+                            </div>
+
+                            <label for="l4-forgedToken">3. Pega tu token forjado (Algorithm Confusion):</label>
+                            <p style="font-size: 0.85rem; color: #a9b1d6; margin-top: 0;">Tip: Cambia el algoritmo a
+                                HS256 y usa la Key Pública como secret.</p>
+                            <textarea id="l4-forgedToken" rows="5"
+                                placeholder="Header: { alg: 'HS256', ... }&#10;Payload: { role: 'admin' }&#10;Firma: HMACSHA256(..., secret=PublicKeyPEM)"></textarea>
+                            <button data-action="l4-verify">🚀 Verificar Token</button>
+                        </div>
+                    </section>
                 </div>
-                <p class="mission"><b>Misión:</b> La API valida el token usando la clave pública del header (<code>jwk</code>). Genera tus propias claves, inyecta la pública y firma un token de <code>admin</code>.</p>
-                <div class="challenge-content">
-                    <button data-action="l4-genKeys">1. Generar mi Par de Claves (RSA)</button>
-                    <div id="l4-keysDisplay" style="display:none;">
-                        <p><strong>Clave Pública (Formato JWK para el header):</strong></p>
-                        <pre><code id="l4-publicKey"></code></pre>
+
+                <div class="server-column">
+                    <div class="server-view">
+                        <h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                viewBox="0 0 16 16">
+                                <path
+                                    d="M7.5 1a.5.5 0 0 1 .5.5V3a.5.5 0 0 1-1 0V1.5a.5.5 0 0 1 .5-.5zM4.346 2.929a.5.5 0 0 1 .707 0l1.06 1.06a.5.5 0 0 1-.707.708L4.347 3.636a.5.5 0 0 1 0-.707zM2 7.5a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H2.5a.5.5 0 0 1-.5-.5zm1.06-4.293a.5.5 0 0 1 0 .707L2.929 4.346a.5.5 0 1 1-.707-.707l1.06-1.06a.5.5 0 0 1 .707 0zM13 7.5a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H13.5a.5.5 0 0 1-.5-.5zm-2.06 4.293a.5.5 0 0 1 0 .707l-1.06 1.06a.5.5 0 0 1-.707-.707l1.06-1.06a.5.5 0 0 1 .707 0zM11.654 2.929a.5.5 0 0 1 .707 0l1.06 1.06a.5.5 0 0 1-.707.708L11.654 3.636a.5.5 0 0 1 0-.707zM8.5 13a.5.5 0 0 1 .5.5v1.5a.5.5 0 0 1-1 0V13.5a.5.5 0 0 1 .5-.5z" />
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm0-1A7 7 0 1 1 8 1a7 7 0 0 1 0 14z" />
+                            </svg>
+                            Vista del "Servidor"
+                        </h3>
+                        <div class="server-log-section">
+                            <h4>Análisis del Token Recibido</h4>
+                            <pre id="server-log-analysis">// Esperando una interacción...</pre>
+                        </div>
+                        <div class="server-log-section">
+                            <h4>Resultado de la Verificación</h4>
+                            <pre id="server-log-verification">// ...</pre>
+                        </div>
+                        <div class="server-log-section">
+                            <h4>Respuesta de la API</h4>
+                            <pre id="server-log-response">// ...</pre>
+                        </div>
+                        <div class="server-log-section" id="cracker-console-container" style="display: none;">
+                            <h4>Consola del Cracker</h4>
+                            <pre id="cracker-console"></pre>
+                        </div>
                     </div>
-                    <label for="l4-maliciousToken">2. Pega tu JWT malicioso (firmado con tu clave privada):</label>
-                    <textarea id="l4-maliciousToken" rows="5" placeholder="Crea un token con tu clave pública en el header (jwk) y payload de admin. Fírmalo con tu clave privada."></textarea>
-                    <button data-action="l4-verify">🚀 Ejecutar Ataque JWK</button>
+            </main>
+
+            <div class="debug-toggle">
+                <button data-action="toggle-debug">🔧 Mostrar Opciones de Depuración</button>
+            </div>
+
+            <footer class="debug-options" id="debug-menu">
+                <div class="debug-menu">
+                    <h3>⚙️ Opciones de Depuración</h3>
+                    <div class="buttons">
+                        <button data-action="debug-unlock">Desbloquear Todos los Retos</button>
+                        <button data-action="debug-solve">Mostrar Soluciones</button>
+                        <button data-action="debug-reset">🔄 Reiniciar Laboratorio</button>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+        <!-- Página del Centro de Aprendizaje -->
+        <div class="page" id="learning-page">
+            <section class="learning-section">
+                <div class="learning-header">
+                    <h2>🎓 Centro de Aprendizaje JWT</h2>
+                    <p>Aprende los conceptos fundamentales de JSON Web Tokens y las herramientas para trabajar con ellos
+                    </p>
+                </div>
+
+                <nav class="learning-nav">
+                    <button class="theory-nav active" data-target="intro">🔰 Introducción</button>
+                    <button class="theory-nav" data-target="structure">🏗️ Estructura</button>
+                    <button class="theory-nav" data-target="vulnerabilities">⚠️ Vulnerabilidades</button>
+                    <button class="theory-nav" data-target="tools">🛠️ Herramientas</button>
+                    <button class="theory-nav" data-target="protection">🛡️ Protección</button>
+                </nav>
+
+                <div class="learning-content">
+                    <!-- Introducción -->
+                    <div class="theory-section active" id="intro">
+                        <h3>¿Qué es JWT?</h3>
+                        <p>Un <span class="highlight">JSON Web Token (JWT)</span> es un estándar compacto para
+                            representar información de forma segura entre dos partes. Se especifica en RFC 7519 y se
+                            puede implementar como:</p>
+
+                        <div class="jwt-parts">
+                            <div class="jwt-part">
+                                <h4>🔏 JWS</h4>
+                                <p>JSON Web Signature - Los datos están firmados digitalmente pero son legibles</p>
+                            </div>
+                            <div class="jwt-part">
+                                <h4>🔐 JWE</h4>
+                                <p>JSON Web Encryption - Los datos están completamente encriptados</p>
+                            </div>
+                        </div>
+
+                        <h4>¿Cómo funciona?</h4>
+                        <p>El servidor genera un JWT cuando un usuario se autentica. Este token se envía al cliente y se
+                            adjunta automáticamente a cada solicitud HTTP posterior, permitiendo al servidor identificar
+                            al usuario sin autenticación adicional.</p>
+
+                        <div class="jwt-structure">
+                            <h4>🔄 Flujo de Autenticación JWT</h4>
+                            <p><strong>1.</strong> Usuario se autentica → <strong>2.</strong> Servidor genera JWT →
+                                <strong>3.</strong> Cliente almacena token → <strong>4.</strong> Cliente envía token en
+                                cada request → <strong>5.</strong> Servidor verifica firma
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Estructura -->
+                    <div class="theory-section" id="structure">
+                        <h3>🏗️ Estructura de un JWT</h3>
+                        <p>Un JWT se compone de tres partes separadas por puntos (.):</p>
+
+                        <div class="code-example">
+                            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaXNBZG1pbiI6ZmFsc2V9.EypViEDiJhjeuXgjtGdibxrFPFZyYKn-KqFeAw3c2No
+                        </div>
+
+                        <div class="jwt-parts">
+                            <div class="jwt-part header">
+                                <h4>📋 Header (Encabezado)</h4>
+                                <p>Especifica el algoritmo de firma y tipo de token</p>
+                                <code>{"alg": "HS256", "typ": "JWT"}</code>
+                            </div>
+                            <div class="jwt-part payload">
+                                <h4>📦 Payload (Carga útil)</h4>
+                                <p>Contiene las "claims" o declaraciones sobre el usuario</p>
+                                <code>{"sub": "1234567890", "name": "John Doe", "isAdmin": false}</code>
+                            </div>
+                            <div class="jwt-part signature">
+                                <h4>✍️ Signature (Firma)</h4>
+                                <p>Garantiza que el token no ha sido alterado</p>
+                                <code>HMACSHA256(header + payload, secret)</code>
+                            </div>
+                        </div>
+
+                        <h4>Tipos de Claims</h4>
+                        <div class="jwt-structure">
+                            <p><strong>🏷️ Registradas:</strong> Definidas por RFC 7519 (sub, exp, iat, etc.)</p>
+                            <p><strong>🌐 Públicas:</strong> Estandarizadas por IANA para evitar colisiones</p>
+                            <p><strong>🔒 Privadas:</strong> Definidas libremente por los desarrolladores</p>
+                        </div>
+                    </div>
+
+                    <!-- Vulnerabilidades -->
+                    <div class="theory-section" id="vulnerabilities">
+                        <h3>⚠️ Vulnerabilidades Comunes</h3>
+
+                        <div class="vulnerability-card">
+                            <h4>🚨 Firma No Verificada</h4>
+                            <p>El servidor no verifica la firma del JWT, permitiendo modificaciones arbitrarias del
+                                payload sin detección.</p>
+                        </div>
+
+                        <div class="vulnerability-card">
+                            <h4>🚨 Algoritmo "none"</h4>
+                            <p>El servidor acepta tokens con <code>alg: "none"</code>, eliminando completamente la
+                                protección de la firma.</p>
+                        </div>
+
+                        <div class="vulnerability-card">
+                            <h4>🚨 Secretos Débiles</h4>
+                            <p>Uso de claves fáciles de adivinar que pueden ser crackeadas por fuerza bruta con
+                                herramientas como Hashcat.</p>
+                        </div>
+
+                        <div class="vulnerability-card">
+                            <h4>🚨 Inyección JWK</h4>
+                            <p>Manipulación del parámetro <code>jwk</code> en el header para inyectar claves públicas
+                                controladas por el atacante.</p>
+                        </div>
+
+                        <div class="vulnerability-card">
+                            <h4>🚨 Confusión de Algoritmos</h4>
+                            <p>Cambio de algoritmo asimétrico (RS256) a simétrico (HS256) usando la clave pública como
+                                secreto.</p>
+                        </div>
+                    </div>
+
+                    <!-- Herramientas -->
+                    <div class="theory-section" id="tools">
+                        <h3>🛠️ Herramientas Recomendadas</h3>
+
+                        <div class="tools-grid">
+                            <div class="tool-card">
+                                <h4>🌐 JWT.io</h4>
+                                <p>Debugger online para decodificar, verificar y generar JWT. Ideal para principiantes.
+                                </p>
+                                <a href="https://jwt.io" target="_blank">🔗 Visitar jwt.io</a>
+                            </div>
+
+                            <div class="tool-card">
+                                <h4>🔥 Hashcat</h4>
+                                <p>Herramienta de cracking para fuerza bruta de secretos JWT débiles.</p>
+                                <code>hashcat -a 0 -m 16500 [JWT] [wordlist]</code>
+                            </div>
+
+                            <div class="tool-card">
+                                <h4>🔧 JWT Editor (Burp)</h4>
+                                <p>Extensión de Burp Suite para generar, modificar y atacar JWT de forma avanzada.</p>
+                                <a href="https://portswigger.net/bappstore/26aaa5ded2f74beea19e2ed8345a93dd"
+                                    target="_blank">🔗 Descargar extensión</a>
+                            </div>
+
+                            <div class="tool-card">
+                                <h4>🍰 CyberChef</h4>
+                                <p>Navaja suiza cibernética para decodificar, codificar y manipular datos JWT.</p>
+                                <a href="https://gchq.github.io/CyberChef/" target="_blank">🔗 Usar CyberChef</a>
+                            </div>
+
+                            <div class="tool-card">
+                                <h4>🔐 rsa_sign2n</h4>
+                                <p>Herramienta para ataques de confusión de algoritmos RSA.</p>
+                                <code>python rsa_sign2n.py [JWT1] [JWT2]</code>
+                            </div>
+
+                            <div class="tool-card">
+                                <h4>📚 SecLists</h4>
+                                <p>Colección de listas de palabras incluyendo secretos JWT comunes.</p>
+                                <a href="https://github.com/danielmiessler/SecLists" target="_blank">🔗 Ver SecLists</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Protección -->
+                    <div class="theory-section" id="protection">
+                        <h3>🛡️ Mejores Prácticas de Seguridad</h3>
+
+                        <div class="jwt-structure">
+                            <h4>✅ Configuración Segura</h4>
+                            <p><strong>• Algoritmo específico:</strong> Define explícitamente qué algoritmo usar (HS256,
+                                RS256)</p>
+                            <p><strong>• Lista blanca:</strong> Usa listas blancas en lugar de listas negras para
+                                algoritmos</p>
+                            <p><strong>• Secretos robustos:</strong> Usa secretos largos y aleatorios (mínimo 256 bits)
+                            </p>
+                        </div>
+
+                        <div class="jwt-structure">
+                            <h4>🔒 Validación Estricta</h4>
+                            <p><strong>• Verificar siempre:</strong> Nunca omitas la verificación de firma</p>
+                            <p><strong>• Validar claims:</strong> Verifica exp, iat, nbf y otras claims críticas</p>
+                            <p><strong>• Dominio JKU:</strong> Si usas JKU, implementa whitelist de dominios</p>
+                        </div>
+
+                        <div class="jwt-structure">
+                            <h4>⏱️ Gestión de Ciclo de Vida</h4>
+                            <p><strong>• Expiración corta:</strong> Usa tiempos de vida cortos (15-30 minutos)</p>
+                            <p><strong>• Refresh tokens:</strong> Implementa sistema de renovación</p>
+                            <p><strong>• Revocación:</strong> Mantén lista negra para tokens comprometidos</p>
+                        </div>
+
+                        <div class="vulnerability-card">
+                            <h4>🚫 Evitar Errores Comunes</h4>
+                            <p><strong>• No reutilizar secretos:</strong> Usa secretos únicos por aplicación/entorno</p>
+                            <p><strong>• No confiar en el cliente:</strong> Valida toda información del JWT en el
+                                servidor</p>
+                            <p><strong>• No almacenar datos sensibles:</strong> Los JWT son fácilmente decodificables
+                            </p>
+                        </div>
+                    </div>
+
                 </div>
             </section>
         </div>
-
-        <div class="server-column">
-            <div class="server-view">
-                <h3>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M7.5 1a.5.5 0 0 1 .5.5V3a.5.5 0 0 1-1 0V1.5a.5.5 0 0 1 .5-.5zM4.346 2.929a.5.5 0 0 1 .707 0l1.06 1.06a.5.5 0 0 1-.707.708L4.347 3.636a.5.5 0 0 1 0-.707zM2 7.5a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H2.5a.5.5 0 0 1-.5-.5zm1.06-4.293a.5.5 0 0 1 0 .707L2.929 4.346a.5.5 0 1 1-.707-.707l1.06-1.06a.5.5 0 0 1 .707 0zM13 7.5a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H13.5a.5.5 0 0 1-.5-.5zm-2.06 4.293a.5.5 0 0 1 0 .707l-1.06 1.06a.5.5 0 0 1-.707-.707l1.06-1.06a.5.5 0 0 1 .707 0zM11.654 2.929a.5.5 0 0 1 .707 0l1.06 1.06a.5.5 0 0 1-.707.708L11.654 3.636a.5.5 0 0 1 0-.707zM8.5 13a.5.5 0 0 1 .5.5v1.5a.5.5 0 0 1-1 0V13.5a.5.5 0 0 1 .5-.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm0-1A7 7 0 1 1 8 1a7 7 0 0 1 0 14z"/></svg>
-                    Vista del "Servidor"
-                </h3>
-                <div class="server-log-section">
-                    <h4>Análisis del Token Recibido</h4>
-                    <pre id="server-log-analysis">// Esperando una interacción...</pre>
-                </div>
-                <div class="server-log-section">
-                    <h4>Resultado de la Verificación</h4>
-                    <pre id="server-log-verification">// ...</pre>
-                </div>
-                <div class="server-log-section">
-                    <h4>Respuesta de la API</h4>
-                    <pre id="server-log-response">// ...</pre>
-                </div>
-                 <div class="server-log-section" id="cracker-console-container" style="display: none;">
-                    <h4>Consola del Cracker</h4>
-                    <pre id="cracker-console"></pre>
-                </div>
-            </div>
-        </main>
-        
-        <div class="debug-toggle">
-            <button data-action="toggle-debug">🔧 Mostrar Opciones de Depuración</button>
-        </div>
-        
-        <footer class="debug-options" id="debug-menu">
-            <div class="debug-menu">
-                <h3>⚙️ Opciones de Depuración</h3>
-                <div class="buttons">
-                    <button data-action="debug-unlock">Desbloquear Todos los Retos</button>
-                    <button data-action="debug-solve">Mostrar Soluciones</button>
-                    <button data-action="debug-reset">🔄 Reiniciar Laboratorio</button>
-                </div>
-            </div>
-        </footer>
-    </div>
-
-    <!-- Página del Centro de Aprendizaje -->
-    <div class="page" id="learning-page">
-        <section class="learning-section">
-            <div class="learning-header">
-                <h2>🎓 Centro de Aprendizaje JWT</h2>
-                <p>Aprende los conceptos fundamentales de JSON Web Tokens y las herramientas para trabajar con ellos</p>
-            </div>
-            
-            <nav class="learning-nav">
-                <button class="theory-nav active" data-target="intro">🔰 Introducción</button>
-                <button class="theory-nav" data-target="structure">🏗️ Estructura</button>
-                <button class="theory-nav" data-target="vulnerabilities">⚠️ Vulnerabilidades</button>
-                <button class="theory-nav" data-target="tools">🛠️ Herramientas</button>
-                <button class="theory-nav" data-target="protection">🛡️ Protección</button>
-            </nav>
-            
-            <div class="learning-content">
-                <!-- Introducción -->
-                <div class="theory-section active" id="intro">
-                    <h3>¿Qué es JWT?</h3>
-                    <p>Un <span class="highlight">JSON Web Token (JWT)</span> es un estándar compacto para representar información de forma segura entre dos partes. Se especifica en RFC 7519 y se puede implementar como:</p>
-                    
-                    <div class="jwt-parts">
-                        <div class="jwt-part">
-                            <h4>🔏 JWS</h4>
-                            <p>JSON Web Signature - Los datos están firmados digitalmente pero son legibles</p>
-                        </div>
-                        <div class="jwt-part">
-                            <h4>🔐 JWE</h4>
-                            <p>JSON Web Encryption - Los datos están completamente encriptados</p>
-                        </div>
-                    </div>
-                    
-                    <h4>¿Cómo funciona?</h4>
-                    <p>El servidor genera un JWT cuando un usuario se autentica. Este token se envía al cliente y se adjunta automáticamente a cada solicitud HTTP posterior, permitiendo al servidor identificar al usuario sin autenticación adicional.</p>
-                    
-                    <div class="jwt-structure">
-                        <h4>🔄 Flujo de Autenticación JWT</h4>
-                        <p><strong>1.</strong> Usuario se autentica → <strong>2.</strong> Servidor genera JWT → <strong>3.</strong> Cliente almacena token → <strong>4.</strong> Cliente envía token en cada request → <strong>5.</strong> Servidor verifica firma</p>
-                    </div>
-                </div>
-                
-                <!-- Estructura -->
-                <div class="theory-section" id="structure">
-                    <h3>🏗️ Estructura de un JWT</h3>
-                    <p>Un JWT se compone de tres partes separadas por puntos (.):</p>
-                    
-                    <div class="code-example">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaXNBZG1pbiI6ZmFsc2V9.EypViEDiJhjeuXgjtGdibxrFPFZyYKn-KqFeAw3c2No</div>
-                    
-                    <div class="jwt-parts">
-                        <div class="jwt-part header">
-                            <h4>📋 Header (Encabezado)</h4>
-                            <p>Especifica el algoritmo de firma y tipo de token</p>
-                            <code>{"alg": "HS256", "typ": "JWT"}</code>
-                        </div>
-                        <div class="jwt-part payload">
-                            <h4>📦 Payload (Carga útil)</h4>
-                            <p>Contiene las "claims" o declaraciones sobre el usuario</p>
-                            <code>{"sub": "1234567890", "name": "John Doe", "isAdmin": false}</code>
-                        </div>
-                        <div class="jwt-part signature">
-                            <h4>✍️ Signature (Firma)</h4>
-                            <p>Garantiza que el token no ha sido alterado</p>
-                            <code>HMACSHA256(header + payload, secret)</code>
-                        </div>
-                    </div>
-                    
-                    <h4>Tipos de Claims</h4>
-                    <div class="jwt-structure">
-                        <p><strong>🏷️ Registradas:</strong> Definidas por RFC 7519 (sub, exp, iat, etc.)</p>
-                        <p><strong>🌐 Públicas:</strong> Estandarizadas por IANA para evitar colisiones</p>
-                        <p><strong>🔒 Privadas:</strong> Definidas libremente por los desarrolladores</p>
-                    </div>
-                </div>
-                
-                <!-- Vulnerabilidades -->
-                <div class="theory-section" id="vulnerabilities">
-                    <h3>⚠️ Vulnerabilidades Comunes</h3>
-                    
-                    <div class="vulnerability-card">
-                        <h4>🚨 Firma No Verificada</h4>
-                        <p>El servidor no verifica la firma del JWT, permitiendo modificaciones arbitrarias del payload sin detección.</p>
-                    </div>
-                    
-                    <div class="vulnerability-card">
-                        <h4>🚨 Algoritmo "none"</h4>
-                        <p>El servidor acepta tokens con <code>alg: "none"</code>, eliminando completamente la protección de la firma.</p>
-                    </div>
-                    
-                    <div class="vulnerability-card">
-                        <h4>🚨 Secretos Débiles</h4>
-                        <p>Uso de claves fáciles de adivinar que pueden ser crackeadas por fuerza bruta con herramientas como Hashcat.</p>
-                    </div>
-                    
-                    <div class="vulnerability-card">
-                        <h4>🚨 Inyección JWK</h4>
-                        <p>Manipulación del parámetro <code>jwk</code> en el header para inyectar claves públicas controladas por el atacante.</p>
-                    </div>
-                    
-                    <div class="vulnerability-card">
-                        <h4>🚨 Confusión de Algoritmos</h4>
-                        <p>Cambio de algoritmo asimétrico (RS256) a simétrico (HS256) usando la clave pública como secreto.</p>
-                    </div>
-                </div>
-                
-                <!-- Herramientas -->
-                <div class="theory-section" id="tools">
-                    <h3>🛠️ Herramientas Recomendadas</h3>
-                    
-                    <div class="tools-grid">
-                        <div class="tool-card">
-                            <h4>🌐 JWT.io</h4>
-                            <p>Debugger online para decodificar, verificar y generar JWT. Ideal para principiantes.</p>
-                            <a href="https://jwt.io" target="_blank">🔗 Visitar jwt.io</a>
-                        </div>
-                        
-                        <div class="tool-card">
-                            <h4>🔥 Hashcat</h4>
-                            <p>Herramienta de cracking para fuerza bruta de secretos JWT débiles.</p>
-                            <code>hashcat -a 0 -m 16500 [JWT] [wordlist]</code>
-                        </div>
-                        
-                        <div class="tool-card">
-                            <h4>🔧 JWT Editor (Burp)</h4>
-                            <p>Extensión de Burp Suite para generar, modificar y atacar JWT de forma avanzada.</p>
-                            <a href="https://portswigger.net/bappstore/26aaa5ded2f74beea19e2ed8345a93dd" target="_blank">🔗 Descargar extensión</a>
-                        </div>
-                        
-                        <div class="tool-card">
-                            <h4>🍰 CyberChef</h4>
-                            <p>Navaja suiza cibernética para decodificar, codificar y manipular datos JWT.</p>
-                            <a href="https://gchq.github.io/CyberChef/" target="_blank">🔗 Usar CyberChef</a>
-                        </div>
-                        
-                        <div class="tool-card">
-                            <h4>🔐 rsa_sign2n</h4>
-                            <p>Herramienta para ataques de confusión de algoritmos RSA.</p>
-                            <code>python rsa_sign2n.py [JWT1] [JWT2]</code>
-                        </div>
-                        
-                        <div class="tool-card">
-                            <h4>📚 SecLists</h4>
-                            <p>Colección de listas de palabras incluyendo secretos JWT comunes.</p>
-                            <a href="https://github.com/danielmiessler/SecLists" target="_blank">🔗 Ver SecLists</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Protección -->
-                <div class="theory-section" id="protection">
-                    <h3>🛡️ Mejores Prácticas de Seguridad</h3>
-                    
-                    <div class="jwt-structure">
-                        <h4>✅ Configuración Segura</h4>
-                        <p><strong>• Algoritmo específico:</strong> Define explícitamente qué algoritmo usar (HS256, RS256)</p>
-                        <p><strong>• Lista blanca:</strong> Usa listas blancas en lugar de listas negras para algoritmos</p>
-                        <p><strong>• Secretos robustos:</strong> Usa secretos largos y aleatorios (mínimo 256 bits)</p>
-                    </div>
-                    
-                    <div class="jwt-structure">
-                        <h4>🔒 Validación Estricta</h4>
-                        <p><strong>• Verificar siempre:</strong> Nunca omitas la verificación de firma</p>
-                        <p><strong>• Validar claims:</strong> Verifica exp, iat, nbf y otras claims críticas</p>
-                        <p><strong>• Dominio JKU:</strong> Si usas JKU, implementa whitelist de dominios</p>
-                    </div>
-                    
-                    <div class="jwt-structure">
-                        <h4>⏱️ Gestión de Ciclo de Vida</h4>
-                        <p><strong>• Expiración corta:</strong> Usa tiempos de vida cortos (15-30 minutos)</p>
-                        <p><strong>• Refresh tokens:</strong> Implementa sistema de renovación</p>
-                        <p><strong>• Revocación:</strong> Mantén lista negra para tokens comprometidos</p>
-                    </div>
-                    
-                    <div class="vulnerability-card">
-                        <h4>🚫 Evitar Errores Comunes</h4>
-                        <p><strong>• No reutilizar secretos:</strong> Usa secretos únicos por aplicación/entorno</p>
-                        <p><strong>• No confiar en el cliente:</strong> Valida toda información del JWT en el servidor</p>
-                        <p><strong>• No almacenar datos sensibles:</strong> Los JWT son fácilmente decodificables</p>
-                    </div>
-                </div>
-                
-            </div>
-        </section>
-    </div>
     </div>
 
     <script>
@@ -1244,31 +1324,31 @@
             const state = {
                 completedLevels: new Set(),
                 level3: { secret: new TextEncoder().encode('secret123'), tokenToCrack: '' },
-                level4: { keys: null }
+                level4: { keys: null, publicPem: '' }
             };
 
             // --- INICIALIZACIÓN ---
             initLevel3();
             document.querySelectorAll('.challenge').forEach(el => el.addEventListener('click', () => setActiveChallenge(el.id)));
-            
+
             // Navegación principal
             document.querySelectorAll('.nav-button').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const targetPage = btn.dataset.page;
                     showPage(targetPage);
-                    
+
                     // Actualizar botón activo
                     document.querySelectorAll('.nav-button').forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
                 });
             });
-            
+
             // Navegación de la sección de aprendizaje
             document.querySelectorAll('.theory-nav').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const target = btn.dataset.target;
                     showTheorySection(target);
-                    
+
                     // Actualizar botón activo
                     document.querySelectorAll('.theory-nav').forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
@@ -1286,27 +1366,27 @@
                     'l1-getToken': generateAndShowLevel1Token, 'l1-verify': verifyLevel1,
                     'l2-verify': verifyLevel2,
                     'l3-bruteforce': startLevel3BruteForce, 'l3-verify': verifyLevel3,
-                    'l4-genKeys': generateAndShowLevel4Keys, 'l4-verify': verifyLevel4,
+                    'l4-genKeys': generateAndShowLevel4Keys, 'l4-getToken': generateAndShowLevel4Token, 'l4-verify': verifyLevel4,
                     'toggle-debug': toggleDebugOptions,
                     'debug-unlock': unlockAllChallenges, 'debug-solve': solveAllChallengesWithConfirmation,
                     'debug-reset': resetLaboratoryWithConfirmation,
                 };
-                
+
                 if (actions[action]) actions[action]();
             });
 
             // --- LÓGICA DE UI ---
             function updateProgress() {
                 const completedCount = state.completedLevels.size;
-                const totalLevels = 4;
+                const totalLevels = 4; // Updated from 5 to 4
                 const percentage = (completedCount / totalLevels) * 100;
                 document.getElementById('progressBar').style.width = `${percentage}%`;
-                const messages = ["¡Comienza tu aventura!", "¡Buen comienzo!", "¡Sigue así!", "¡Vas por la mitad!", "¡Felicidades, eres un experto!"];
+                const messages = ["¡Comienza tu aventura!", "¡Buen comienzo!", "¡Sigue así!", "¡Casi listo!", "¡Felicidades, eres un experto!"];
                 document.getElementById('progressText').textContent = `${Math.round(percentage)}% completado - ${messages[completedCount]}`;
             }
 
             function setActiveChallenge(levelId) {
-                if(document.getElementById(levelId).classList.contains('locked')) return;
+                if (document.getElementById(levelId).classList.contains('locked')) return;
                 document.querySelectorAll('.challenge').forEach(el => el.classList.remove('active'));
                 document.getElementById(levelId).classList.add('active');
             }
@@ -1317,7 +1397,7 @@
                     state.completedLevels.add(levelId);
                     levelElement.classList.add('completed');
                     updateProgress();
-                    
+
                     const currentLevelNum = parseInt(levelId.replace('level', ''));
                     const nextLevelId = `level${currentLevelNum + 1}`;
                     const nextLevelElement = document.getElementById(nextLevelId);
@@ -1327,7 +1407,7 @@
                     }
                 }
             }
-            
+
             function updateServerView({ analysis = '//...', verification = '//...', response = '//...' }) {
                 document.getElementById('server-log-analysis').textContent = analysis;
                 document.getElementById('server-log-verification').textContent = verification;
@@ -1344,7 +1424,7 @@
                 document.getElementById('l1-tokenArea').value = token;
                 updateServerView({ analysis: 'Token de usuario generado y entregado al cliente.' });
             }
-            
+
             function verifyLevel1() {
                 const token = document.getElementById('l1-modifiedToken').value.trim();
                 if (!token) return updateServerView({ analysis: 'ERROR: No se recibió ningún token.' });
@@ -1369,7 +1449,7 @@
                 if (!token) return updateServerView({ analysis: 'ERROR: No se recibió ningún token.' });
                 const parts = token.split('.');
                 if (parts.length < 2 || (parts.length === 3 && parts[2] !== '')) {
-                   return updateServerView({ verification: '❌ DENEGADO: Un token "none" no debe tener firma.' });
+                    return updateServerView({ verification: '❌ DENEGADO: Un token "none" no debe tener firma.' });
                 }
                 try {
                     const header = JSON.parse(atob(parts[0]));
@@ -1390,7 +1470,7 @@
                     updateServerView({ analysis: `❌ ERROR: Token malformado.\n${err.message}` });
                 }
             }
-            
+
             async function initLevel3() {
                 const token = await cryptoHelpers.signHS256({ user: 'user123' }, state.level3.secret);
                 state.level3.tokenToCrack = token;
@@ -1438,67 +1518,122 @@
             async function generateAndShowLevel4Keys() {
                 updateServerView({ analysis: 'Generando par de claves RSA-256...' });
                 const { publicKey, privateKey, publicJwk } = await cryptoHelpers.generateRS256KeyPair();
-                state.level4.keys = { publicKey, privateKey, publicJwk };
-                publicJwk.kid = 'attacker-key-' + Math.random().toString(36).substring(2, 8);
-                document.getElementById('l4-publicKey').textContent = JSON.stringify(publicJwk, null, 2);
+
+                // Exportar a PEM para mostrar al usuario (simulando clave pública expuesta)
+                let spkiPem = '';
+                if (cryptoHelpers.mode === 'webcrypto') {
+                    const exported = await window.crypto.subtle.exportKey("spki", publicKey);
+                    const exportedAsString = String.fromCharCode.apply(null, new Uint8Array(exported));
+                    const exportedAsBase64 = btoa(exportedAsString);
+                    spkiPem = `-----BEGIN PUBLIC KEY-----\n${exportedAsBase64.match(/.{1,64}/g).join('\n')}\n-----END PUBLIC KEY-----`;
+                } else {
+                    spkiPem = KEYUTIL.getPEM(publicKey);
+                }
+
+                state.level4.keys = { publicKey, privateKey };
+                state.level4.publicPem = spkiPem;
+
+                document.getElementById('l4-publicPem').textContent = spkiPem;
                 document.getElementById('l4-keysDisplay').style.display = 'block';
-                updateServerView({ analysis: 'Par de claves generado. Usa la clave pública en el header `jwk` y la privada para firmar (puedes usar jwt.io).' });
+                document.getElementById('l4-btnGetToken').style.display = 'inline-block';
+
+                updateServerView({ analysis: 'Clave Pública generada y expuesta.\nEl servidor espera tokens RS256 firmados por la privada.' });
+            }
+
+            async function generateAndShowLevel4Token() {
+                if (!state.level4.keys) return;
+                updateServerView({ analysis: 'Generando token válido...' });
+
+                const token = await new jose.SignJWT({ user: 'demo_user', role: 'user' })
+                    .setProtectedHeader({ alg: 'RS256', typ: 'JWT' })
+                    .sign(state.level4.keys.privateKey);
+
+                document.getElementById('l4-validToken').textContent = token;
+                document.getElementById('l4-tokenDisplay').style.display = 'block';
+
+                updateServerView({ analysis: 'Token válido generado (RS256). Intenta usar este token como base, cambia el alg a HS256 y fírmalo con la clave pública.' });
             }
 
             async function verifyLevel4() {
-                const token = document.getElementById('l4-maliciousToken').value.trim();
+                const token = document.getElementById('l4-forgedToken').value.trim();
                 if (!token) return updateServerView({ analysis: 'ERROR: No se recibió ningún token.' });
+
                 try {
                     const header = jose.decodeProtectedHeader(token);
-                    if (!header.jwk) throw new Error("Header no contiene parámetro 'jwk'.");
-                    const analysis = `Token recibido.\nHeader: ${JSON.stringify(header, null, 2)}`;
-                    const verification = `ⓘ Se detectó 'jwk' en el header.\nⓘ Importando clave pública del token...`;
-                    const publicKeyFromToken = await cryptoHelpers.importPublicJwk(header.jwk, header.alg);
-                    const { payload } = await cryptoHelpers.verifyWithKey(token, publicKeyFromToken);
-                    const finalVerification = `${verification}\n<span class="success">✅ ¡La firma coincide con la clave pública proporcionada!</span>`;
-                    if (payload.sub === 'admin' || payload.role === 'admin' || payload.user === 'admin') {
-                        updateServerView({ analysis, verification: finalVerification, response: `✅ ÉXITO: Acceso de admin concedido.` });
-                        markLevelAsCompleted('level4');
+
+                    let verificationResult = null;
+                    let methodUsed = '';
+
+                    if (header.alg === 'HS256') {
+                        // VULNERABILIDAD: Key Confusion
+                        // El servidor ve HS256 y usa la clave pública (string) como secret para HMAC
+                        methodUsed = 'HMAC (HS256) con Public Key estática';
+                        // Nota: jose.jwtVerify con string secret usa HS256 por defecto
+                        const secretBytes = new TextEncoder().encode(state.level4.publicPem);
+                        verificationResult = await cryptoHelpers.verifyHS256(token, secretBytes);
+
+                    } else if (header.alg === 'RS256') {
+                        // Verificación correcta RS256
+                        methodUsed = 'RSA (RS256) con Public Key real';
+                        verificationResult = await cryptoHelpers.verifyWithKey(token, state.level4.keys.publicKey);
                     } else {
-                        updateServerView({ analysis, verification: finalVerification, response: `❌ DENEGADO: Payload no es de admin.` });
+                        throw new Error(`Algoritmo no soportado: ${header.alg}`);
                     }
+
+                    const { payload } = verificationResult;
+                    const analysis = `Algoritmo detectado: ${header.alg}.\nMétodo de verificación: ${methodUsed}`;
+                    const verification = `<span class="success">✅ ¡Firma VÁLIDA!</span>`;
+
+                    if ((payload.role === 'admin' || payload.user === 'admin') && header.alg === 'HS256') {
+                        updateServerView({
+                            analysis,
+                            verification,
+                            response: `✅ ÉXITO: Hackeo completado. Usaste la clave pública como secret para firmar HMAC.`
+                        });
+                        markLevelAsCompleted('level4');
+                    } else if (payload.role === 'admin') {
+                        updateServerView({ analysis, verification, response: `❌ DENEGADO: Validado correctamente como admin (RS256), pero no es el hack.` });
+                    } else {
+                        updateServerView({ analysis, verification, response: `❌ DENEGADO: Firma válida pero no eres admin.` });
+                    }
+
                 } catch (err) {
-                    updateServerView({ analysis: `❌ ERROR: No se pudo validar el token.\n${err.message}` });
+                    updateServerView({ analysis: 'Procesando...', verification: `❌ ERROR: Firma INVÁLIDA o Error.\n${err.message}` });
                 }
             }
-            
+
             // --- FUNCIONES DE NAVEGACIÓN ---
             function showPage(pageId) {
                 // Ocultar todas las páginas
                 document.querySelectorAll('.page').forEach(page => {
                     page.classList.remove('active');
                 });
-                
+
                 // Mostrar la página seleccionada
                 const targetPage = document.getElementById(pageId + '-page');
                 if (targetPage) {
                     targetPage.classList.add('active');
                 }
             }
-            
+
             function showTheorySection(sectionId) {
                 // Ocultar todas las secciones
                 document.querySelectorAll('.theory-section').forEach(section => {
                     section.classList.remove('active');
                 });
-                
+
                 // Mostrar la sección seleccionada
                 const targetSection = document.getElementById(sectionId);
                 if (targetSection) {
                     targetSection.classList.add('active');
                 }
             }
-            
+
             // --- FUNCIONES DE DEBUG ---
             function toggleDebugOptions() {
                 const debugMenu = document.getElementById('debug-menu');
                 const toggleButton = document.querySelector('[data-action="toggle-debug"]');
-                
+
                 if (debugMenu.classList.contains('visible')) {
                     debugMenu.classList.remove('visible');
                     toggleButton.textContent = '🔧 Mostrar Opciones de Depuración';
@@ -1507,24 +1642,24 @@
                     toggleButton.textContent = '🔧 Ocultar Opciones de Depuración';
                 }
             }
-            
+
             function unlockAllChallenges() {
                 document.querySelectorAll('.challenge.locked').forEach(el => el.classList.remove('locked'));
                 updateServerView({ analysis: 'Todos los desafíos han sido desbloqueados.' });
             }
-            
+
             function solveAllChallengesWithConfirmation() {
                 const confirmation = confirm(
                     '⚠️ ADVERTENCIA: Esto completará automáticamente todos los desafíos.\n\n' +
                     '¿Estás seguro de que quieres ver todas las soluciones?\n\n' +
                     'Se recomienda intentar resolver los desafíos por ti mismo primero.'
                 );
-                
+
                 if (confirmation) {
                     solveAllChallenges();
                 }
             }
-            
+
             function resetLaboratoryWithConfirmation() {
                 const confirmation = confirm(
                     '🔄 REINICIAR LABORATORIO\n\n' +
@@ -1534,31 +1669,32 @@
                     '• Se bloquearán todos los retos excepto el primero\n\n' +
                     '¡Esta acción no se puede deshacer!'
                 );
-                
+
                 if (confirmation) {
                     resetLaboratory();
                 }
             }
-            
+
             function resetLaboratory() {
                 // Limpiar estado
                 state.completedLevels.clear();
-                state.level4.keys = null;
-                
+
                 // Reinicializar progreso
                 updateProgress();
-                
+
                 // Limpiar todos los campos de texto
                 document.getElementById('l1-tokenArea').value = '';
                 document.getElementById('l1-modifiedToken').value = '';
                 document.getElementById('l2-noneToken').value = '';
                 document.getElementById('l3-forgedToken').value = '';
-                document.getElementById('l4-maliciousToken').value = '';
-                
+                document.getElementById('l4-forgedToken').value = '';
+
                 // Ocultar elementos dinámicos
                 document.getElementById('l4-keysDisplay').style.display = 'none';
+                document.getElementById('l4-tokenDisplay').style.display = 'none';
+                document.getElementById('l4-btnGetToken').style.display = 'none';
                 document.getElementById('cracker-console-container').style.display = 'none';
-                
+
                 // Resetear estados de los retos
                 document.querySelectorAll('.challenge').forEach(challenge => {
                     challenge.classList.remove('completed', 'active');
@@ -1566,37 +1702,38 @@
                         challenge.classList.add('locked');
                     }
                 });
-                
+
                 // Activar el primer reto
                 document.getElementById('level1').classList.add('active');
-                
+
                 // Limpiar vista del servidor
                 updateServerView({
                     analysis: '// Laboratorio reiniciado - Esperando una interacción...',
                     verification: '// ...',
                     response: '// ...'
                 });
-                
+
                 // Reinicializar nivel 3
                 initLevel3();
-                
+
                 updateServerView({ analysis: '🔄 Laboratorio reiniciado exitosamente. ¡Comienza de nuevo!' });
             }
-            
+
             async function solveAllChallenges() {
                 // Nivel 1
-                const payload1 = btoa(JSON.stringify({role: 'admin'})).replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_');
+                const payload1 = btoa(JSON.stringify({ role: 'admin' })).replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_');
                 document.getElementById('l1-modifiedToken').value = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.${payload1}.invalid_signature`;
                 // Nivel 2
                 document.getElementById('l2-noneToken').value = 'eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJyb2xlIjoiYWRtaW4ifQ.';
                 // Nivel 3
                 const token3 = await cryptoHelpers.signHS256({ user: 'admin' }, state.level3.secret);
                 document.getElementById('l3-forgedToken').value = token3;
+
                 // Nivel 4
                 if (!state.level4.keys) await generateAndShowLevel4Keys();
-                const publicJwk = JSON.parse(document.getElementById('l4-publicKey').textContent);
-                const token4 = await cryptoHelpers.signRS256WithJwk({ user: 'admin' }, state.level4.keys.privateKey, publicJwk);
-                document.getElementById('l4-maliciousToken').value = token4;
+                const pemSecret = state.level4.publicPem;
+                const token4 = await cryptoHelpers.signHS256({ role: 'admin' }, new TextEncoder().encode(pemSecret));
+                document.getElementById('l4-forgedToken').value = token4;
 
                 updateServerView({ analysis: 'Soluciones aplicadas en todos los campos.' });
             }
@@ -1672,15 +1809,17 @@
             }
         });
     </script>
-    
+
     <!-- Pie de página -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-text">
                 Simulador Educativo de JWT <br>
-                made with <span class="footer-heart">❤️</span> by <a href="https://www.linkedin.com/in/martin-munoz/" target="_blank" class="text-primary">Martin Muñoz</a>
+                made with <span class="footer-heart">❤️</span> by <a href="https://www.linkedin.com/in/martin-munoz/"
+                    target="_blank" class="text-primary">Martin Muñoz</a>
             </div>
         </div>
     </footer>
 </body>
+
 </html>
